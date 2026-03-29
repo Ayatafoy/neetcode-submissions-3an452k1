@@ -1,0 +1,21 @@
+class Solution:
+    def longestConsecutive(self, nums: List[int]) -> int:
+        if len(nums) == 0:
+            return 0
+        lookup = set(nums)
+        begin_sequence = set([])
+        for x in nums:
+            if not x - 1 in lookup:
+               begin_sequence.add(x) 
+        counter = 1
+        max_counter = 1
+        for k, x in enumerate(begin_sequence):
+            for i in range(len(lookup)):
+                if x + i + 1 in lookup:
+                    counter += 1
+                    if counter > max_counter:
+                        max_counter = counter
+                else:
+                    break
+            counter = 1
+        return max_counter
